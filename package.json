@@ -1,0 +1,13 @@
+{
+  "name": "japanese-numbers",
+  "version": "0.0.1",
+  "description": "CLI for learning Japanese numbers on Mac",
+  "keywords": [
+    "deno",
+    "typescript"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  }
+}
