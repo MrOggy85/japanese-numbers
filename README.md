@@ -1,6 +1,7 @@
-# japanese-numbers
+# Japanese Numbers :jp:
 CLI for learning Japanese numbers
 
+Listen to the spoken number and write your guess.
 
 ## Prerequisites
 This app has been developed and tested on MacOS Catalina.
