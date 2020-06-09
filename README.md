@@ -19,5 +19,5 @@ Kyoko               ja_JP    # こんにちは、私の名前はKyokoです。�
 
 Use `start.sh` and input the max number to practice with.
 ```
-$ ./start.sh [max-number]
+$ ./start.sh MAX_NUMBER
 ```
