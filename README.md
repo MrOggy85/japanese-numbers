@@ -21,3 +21,22 @@ Use `start.sh` and input the max number to practice with.
 ```
 $ ./start.sh MAX_NUMBER
 ```
+
+## Gameplay
+
+```
+
+   /) /)
+  ( ^.^ )
+ C(") (")
+
+----------------------------
+Welcome to Japanese Numbers!
+----------------------------
+Stats: 1/1
+Success Rate: 100%
+
+✅ 82
+
+Press ENTER for next number
+```
