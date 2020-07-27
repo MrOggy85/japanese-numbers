@@ -40,3 +40,6 @@ Success Rate: 100%
 
 Press ENTER for next number
 ```
+
+## Blog Post
+https://www.oskarlindgren.se/blog/making-a-deno-cli-learning-japanese-numbers/
