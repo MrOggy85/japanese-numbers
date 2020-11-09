@@ -1,6 +1,6 @@
 #!/bin/bash
 
-deno \
+deno run \
   --allow-run \
   --allow-env \
   ./main.ts $1
