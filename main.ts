@@ -20,6 +20,24 @@ if (Number.isNaN(maxNumber)) {
   Deno.exit(0);
 }
 
+let voiceFeedback = true
+let fastMode = false
+
+const START_OPTIONS = {
+  NO_VOICE_FEEDBACK: '--no-voice-feedback',
+  FAST_MODE: '--fast-mode',
+}
+
+Deno.args.forEach(x => {
+  if (x === START_OPTIONS.NO_VOICE_FEEDBACK) {
+    voiceFeedback = false
+  } else if(x === START_OPTIONS.FAST_MODE) {
+    voiceFeedback = false
+    fastMode = true
+  }
+})
+
+
 const playerStats = {
   corect: 0,
   wrong: 0,
@@ -56,16 +74,24 @@ while(true) {
     console.log('');
 
     if (result) {
-      sayCorrect();
+      if (voiceFeedback) {
+        sayCorrect();
+      }
       console.log('✅', nextNumber);
     } else {
-      sayWrong();
+      if (voiceFeedback) {
+        sayWrong();
+      }
       console.log('❌ correct number', nextNumber);
     }
   }
-  console.log('');
-  console.log('Press ENTER for next number');
-  await Deno.stdin.read(buffer);
+
+  if (!fastMode) {
+    console.log('');
+    console.log('Press ENTER for next number');
+    await Deno.stdin.read(buffer);
+  }
+
   console.log('What is the number? (press ENTER to listen again)');
 
   nextNumber = Math.round(Math.random() * maxNumber);
