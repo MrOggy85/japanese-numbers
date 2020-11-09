@@ -4,9 +4,10 @@ import { cuteBunny, happyBunny, angryBunny } from './bunny.ts';
 async function clear() {
   const process = Deno.run({
     cmd: ['clear'],
-  });
+  })
 
-  await process.status();
+  await process.status()
+  process.close()
 }
 
 const buffer = new Uint8Array(1024);
