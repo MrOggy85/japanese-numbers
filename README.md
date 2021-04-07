@@ -22,6 +22,11 @@ Use `start.sh` and input the max number to practice with.
 $ ./start.sh MAX_NUMBER
 ```
 
+## Options
+* `-nvf, --no-voice-feedback` - No Voice Feedback after guessed a number.
+* `f, --fast-mode` - Get a new number directly after guessed a number.
+* `sv, --slow-voice` - Slow down voice rate when speaking a number.
+
 ## Gameplay
 
 ```

@@ -14,10 +14,14 @@ export async function sayWrong() {
   process.close()
 }
 
-export async function sayNumber(number: string) {
-  const process = Deno.run({
-    cmd: ['say', '-v', 'Kyoko', number],
-  })
+export async function sayNumber(number: string, slowVoice: boolean) {
+  const process = slowVoice
+    ? Deno.run({
+      cmd: ['say', '-v', 'Kyoko', '-r', '100', number],
+    })
+    : Deno.run({
+      cmd: ['say', '-v', 'Kyoko', number],
+    })
 
   await process.status();
   process.close()

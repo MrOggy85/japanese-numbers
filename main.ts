@@ -10,30 +10,59 @@ async function clear() {
   process.close()
 }
 
+function printUsage() {
+  console.log('Japanese Numbers');
+  console.log('');
+  console.log('Usage:');
+  console.log('Please start program like this:');
+  console.log('./start.sh MAX_NUMBER [options]');
+  console.log('');
+  console.log('Options:');
+  console.log('-nvf, --no-voice-feedback');
+  console.log('  No Voice Feedback after guessed a number.');
+  console.log('-f, --fast-mode');
+  console.log('  Get a new number directly after guessed a number.');
+  console.log('-sv, --slow-voice');
+  console.log('  Slow down voice rate when speaking a number.');
+  console.log('');
+}
+
 const buffer = new Uint8Array(1024);
 
 const maxNumberRaw = Deno.args[0];
 const maxNumber = Number(maxNumberRaw);
 if (Number.isNaN(maxNumber)) {
-  console.log('Please start program like this:');
-  console.log('./start.sh MAX_NUMBER');
+  printUsage();
   Deno.exit(0);
 }
 
-let voiceFeedback = true
-let fastMode = false
+let voiceFeedback = true;
+let fastMode = false;
+let slowVoice = false;
 
 const START_OPTIONS = {
   NO_VOICE_FEEDBACK: '--no-voice-feedback',
+  NO_VOICE_FEEDBACK_SHORT: '-nvf',
   FAST_MODE: '--fast-mode',
+  FAST_MODE_SHORT: '-f',
+  SLOW_VOICE: '--slow-voice',
+  SLOW_VOICE_SHORT: '-sv',
 }
 
-Deno.args.forEach(x => {
-  if (x === START_OPTIONS.NO_VOICE_FEEDBACK) {
+Deno.args.forEach((x, i) => {
+  if (i === 0) {
+    return;
+  }
+  if (x === START_OPTIONS.NO_VOICE_FEEDBACK || x === START_OPTIONS.NO_VOICE_FEEDBACK_SHORT) {
+    voiceFeedback = false;
+  } else if(x === START_OPTIONS.FAST_MODE || x === START_OPTIONS.FAST_MODE_SHORT) {
     voiceFeedback = false
-  } else if(x === START_OPTIONS.FAST_MODE) {
-    voiceFeedback = false
-    fastMode = true
+    fastMode = true;
+  } else if(x === START_OPTIONS.SLOW_VOICE || x === START_OPTIONS.SLOW_VOICE_SHORT) {
+    slowVoice = true;
+  } else {
+    printUsage();
+    Deno.exit(0);
   }
 })
 
@@ -98,7 +127,7 @@ while(true) {
 
   let text = '';
   do {
-    sayNumber(nextNumber.toString());
+    sayNumber(nextNumber.toString(), slowVoice);
 
     const n2 = await Deno.stdin.read(buffer);
     const textRaw = new TextDecoder().decode(buffer.subarray(0, n2!));
